@@ -1,0 +1,145 @@
+<!-- SPDX-FileCopyrightText: Copyright (c) 2026 NVIDIA CORPORATION & AFFILIATES. All rights reserved. -->
+<!-- SPDX-License-Identifier: Apache-2.0 -->
+
+# Third-Party Notices
+
+This file lists third-party code and licenses distributed with this project.
+
+## PRoPE Relative Positional Encoding
+
+- File: `model_training/net/prope.py`
+- Source: "Cameras as Relative Positional Encoding" (https://arxiv.org/pdf/2507.10496)
+- License: MIT
+
+```text
+MIT License
+
+Copyright (c) Authors of
+"Cameras as Relative Positional Encoding" https://arxiv.org/pdf/2507.10496
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
+
+## GenFusion Utility Code
+
+- Files: `model_eval/genfusion_lossutil.py`, `model_eval/lpipsPytorch/`
+- Source: Inception3D/GenFusion (https://github.com/Inception3D/GenFusion)
+- License: MIT
+
+```text
+MIT License
+
+Copyright (c) 2025 Sibo Wu
+
+Permission is hereby granted, free of charge, to any person obtaining a copy
+of this software and associated documentation files (the "Software"), to deal
+in the Software without restriction, including without limitation the rights
+to use, copy, modify, merge, publish, distribute, sublicense, and/or sell
+copies of the Software, and to permit persons to whom the Software is
+furnished to do so, subject to the following conditions:
+
+The above copyright notice and this permission notice shall be included in all
+copies or substantial portions of the Software.
+
+THE SOFTWARE IS PROVIDED "AS IS", WITHOUT WARRANTY OF ANY KIND, EXPRESS OR
+IMPLIED, INCLUDING BUT NOT LIMITED TO THE WARRANTIES OF MERCHANTABILITY,
+FITNESS FOR A PARTICULAR PURPOSE AND NONINFRINGEMENT. IN NO EVENT SHALL THE
+AUTHORS OR COPYRIGHT HOLDERS BE LIABLE FOR ANY CLAIM, DAMAGES OR OTHER
+LIABILITY, WHETHER IN AN ACTION OF CONTRACT, TORT OR OTHERWISE, ARISING FROM,
+OUT OF OR IN CONNECTION WITH THE SOFTWARE OR THE USE OR OTHER DEALINGS IN THE
+SOFTWARE.
+```
+
+## LPIPS / PerceptualSimilarity
+
+- Files: `model_eval/lpipsPytorch/`
+- Source: richzhang/PerceptualSimilarity (https://github.com/richzhang/PerceptualSimilarity)
+- License: BSD-2-Clause
+
+```text
+Copyright (c) 2018, Richard Zhang, Phillip Isola, Alexei A. Efros, Eli Shechtman, Oliver Wang
+
+All rights reserved.
+
+Redistribution and use in source and binary forms, with or without
+modification, are permitted provided that the following conditions are met:
+
+* Redistributions of source code must retain the above copyright notice, this
+  list of conditions and the following disclaimer.
+
+* Redistributions in binary form must reproduce the above copyright notice,
+  this list of conditions and the following disclaimer in the documentation
+  and/or other materials provided with the distribution.
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS "AS IS"
+AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT LIMITED TO, THE
+IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS FOR A PARTICULAR PURPOSE ARE
+DISCLAIMED. IN NO EVENT SHALL THE COPYRIGHT HOLDER OR CONTRIBUTORS BE LIABLE
+FOR ANY DIRECT, INDIRECT, INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL
+DAMAGES (INCLUDING, BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR
+SERVICES; LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT LIABILITY,
+OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN ANY WAY OUT OF THE USE
+OF THIS SOFTWARE, EVEN IF ADVISED OF THE POSSIBILITY OF SUCH DAMAGE.
+```
+
+## 3DGUT Rasterizer (FlashSplat copy)
+
+- Path: `flashsplat/threedgut_flashsplat_tracer`
+- Source: `thirdparty/3DGRUT-ArtiFixer/threedgut_tracer` @ 62e1038b74b2edc01440fd4ddf5f080109b6faba
+- Repository: https://github.com/nv-tlabs/3DGRUT-ArtiFixer
+- License: Apache-2.0
+
+A copy of the 3DGUT rasterizer, modified to accumulate per-Gaussian alpha-blending weights
+per mask label. It builds as a separate torch extension and leaves the submodule untouched.
+See `flashsplat/threedgut_flashsplat_tracer/README.md` for the exact set of changes.
+
+## FlashSplat
+
+- Path: `flashsplat/solver.py`, and the accumulation hook in `flashsplat/threedgut_flashsplat_tracer`
+- Source: "FlashSplat: 2D to 3D Gaussian Splatting Segmentation Solved Optimally" (ECCV 2024),
+  https://github.com/florinshen/FlashSplat
+- License: see the upstream repository
+
+`flashsplat/solver.py` is a port of `multi_instance_opt` from the FlashSplat reference
+implementation. The rasterizer hook implements the same per-Gaussian, per-label
+accumulation of `alpha * transmittance` that FlashSplat adds to the 3DGS rasterizer.
+
+## Inpaint360GS
+
+- Path: `inpaint360gs/`
+- Source: "Inpaint360GS: Efficient Object-Aware 3D Inpainting via Gaussian Splatting for 360°
+  Scenes" (WACV 2026), https://github.com/dfki-av/Inpaint360GS @ d54c893
+- License: Apache-2.0
+
+`inpaint360gs/` ports the official pipeline (mask association, identity distillation, object
+removal, virtual camera poses, LaMa inpainting setup, Gaussian initialisation and inpainting
+finetune) onto 3DGUT. `inpaint360gs/lama.py` also ports LaMa's feature refinement
+(`saicinpainting/evaluation/refinement.py`, https://github.com/advimman/lama, Apache-2.0).
+
+## 3DGRUT
+
+- Path: `thirdparty/3DGRUT-ArtiFixer`
+- Repository: https://github.com/nv-tlabs/3DGRUT-ArtiFixer
+- Upstream project: https://github.com/nv-tlabs/3dgrut
+- ArtiFixer integration commit: 9fce681577334709078098206f6f414f36e1ad61
+- License: Apache-2.0
+
+The Apache License, Version 2.0 text is reproduced in this repository's
+`LICENSE` file.
